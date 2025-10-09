@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Upload - CIFAR-10 Classifier</title>
+</head>
+<body>
+  <h2>📸 Загрузите изображение для классификации</h2>
+
+  <form action="/predict" method="post" enctype="multipart/form-data">
+    <label for="model">Выберите модель:</label>
+    <select name="model_name" id="model">
+      <option value="cnn">CNN</option>
+      <option value="resnet">ResNet18</option>
+    </select>
+
+    <br><br>
+    <input type="file" name="files" multiple>
+    <button type="submit">Отправить</button>
+  </form>
+</body>
+</html>
+
