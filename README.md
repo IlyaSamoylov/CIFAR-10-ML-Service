@@ -2,7 +2,18 @@
 ## Быстрый старт:
 ## Quick start
 
-1. Склонировать репозиторий:
+## Запуск докер контейнера:
+1. Скачать образ
+```bash
+docker pull ghcr.io/ilyasamoylov/cifar-10-ml-service:latest
+```
+2. Запустить докер контейнер
+```bash
+docker run -p 8000:8000 ghcr.io/ilyasamoylov/cifar-10-ml-service:latest
+```
+
+## Склонировать репозиторий:
+1. Клонирование репозитория
 ```bash
 git clone https://github.com/IlyaSamoylov/CIFAR-10-ML-Service
 cd <repo>
