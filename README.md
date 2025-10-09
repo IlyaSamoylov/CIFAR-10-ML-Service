@@ -4,7 +4,7 @@
 
 1. Склонировать репозиторий:
 ```bash
-git clone https://github.com/<username>/<repo>.git
+git clone https://github.com/IlyaSamoylov/CIFAR-10-ML-Service
 cd <repo>
 ```
 2. Установить зависимости:
