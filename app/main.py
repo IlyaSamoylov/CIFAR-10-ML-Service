@@ -36,7 +36,6 @@ MODELS_DIR = os.path.join(BASE_DIR, "models")
 cnn_path = os.path.join(MODELS_DIR, "cnn.pth")
 resnet_path = os.path.join(MODELS_DIR, "resnet18.pth")
 
-
 # CNN
 class BetterCNN(nn.Module):
     def __init__(self):
@@ -103,8 +102,17 @@ def predict_image(image: Image.Image, model_name: Literal["cnn", "resnet"]) -> d
 # FastAPI App
 app = FastAPI(title="CIFAR-10 Classifier (CNN & ResNet18)")
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
-templates = Jinja2Templates(directory="templates")
+# 📁 Пути к статике и шаблонам
+STATIC_DIR = os.path.join(BASE_DIR, "static")
+TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
+UPLOADS_DIR = os.path.join(BASE_DIR, "uploads")  # пригодится, если будешь сохранять
+
+# Проверяем, что папки существуют (на всякий случай)
+os.makedirs(UPLOADS_DIR, exist_ok=True)
+
+# Подключаем статику и шаблоны по абсолютным путям
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+templates = Jinja2Templates(directory=TEMPLATES_DIR)
 
 
 # главная
