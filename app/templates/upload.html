@@ -1,7 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-  <title>Image Upload - CIFAR-10 Classifier</title>
+  <meta charset="UTF-8">
+  <title>CIFAR-10 Classifier</title>
+  <link rel="stylesheet" href="/static/style.css"> <!-- подключение css -->
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 40px;
+      text-align: center;
+    }
+    form {
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
   <h2>📸 Загрузите изображение для классификации</h2>
@@ -14,9 +26,8 @@
     </select>
 
     <br><br>
-    <input type="file" name="files" multiple>
+    <input type="file" name="files" multiple accept="image/*">
     <button type="submit">Отправить</button>
   </form>
 </body>
 </html>
-
