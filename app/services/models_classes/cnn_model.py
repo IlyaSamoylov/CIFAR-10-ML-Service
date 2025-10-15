@@ -2,10 +2,7 @@ import torch
 import torch.nn as nn
 import os
 
-from app.config import DEVICE
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-MODELS_DIR = os.path.join(BASE_DIR, "models")
+from app.config import DEVICE, MODELS_DIR
 
 class BetterCNN(nn.Module):
     def __init__(self):
@@ -39,7 +36,7 @@ class BetterCNN(nn.Module):
         self.to(DEVICE)
 
         # отладка
-        print(f"Loaded weights for CNN from {path}")
+        print(f"Веса для CNN загружены из директории {path}")
 
         self.eval()
         return self

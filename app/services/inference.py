@@ -3,15 +3,9 @@ from typing import Literal, Dict
 import torch
 from torchvision import transforms
 
-from .model_loader import get_models
+from .model_loader import get_model
 from .preprocess import clean_image
-from app.config import DEVICE
-
-# Метки классов CIFAR-10
-CIFAR10_CLASSES = [
-    "airplane", "car", "bird", "cat", "deer",
-    "dog", "frog", "horse", "ship", "truck"
-]
+from app.config import DEVICE, CIFAR10_CLASSES
 
 # Трансформации
 _transform = transforms.Compose([
@@ -29,10 +23,7 @@ def predict_image(image: Image.Image, model_name: Literal["cnn", "resnet"]) -> D
     image_tensor = _transform(image).unsqueeze(0).to(DEVICE)
 
     # Получить одну нужную модель из доступных
-    models = get_models()
-    model = models.get(model_name)
-    if model is None:
-        raise ValueError(f"Unknown model: {model_name}")
+    model = get_model(model_name)
 
     with torch.no_grad():
         outputs = model(image_tensor)

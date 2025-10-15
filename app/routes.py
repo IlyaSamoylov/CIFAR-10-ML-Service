@@ -1,4 +1,3 @@
-import os
 from typing import List
 from fastapi import APIRouter, Request, File, UploadFile, Form, HTTPException
 from fastapi.responses import HTMLResponse
@@ -6,12 +5,7 @@ from fastapi.templating import Jinja2Templates
 from PIL import Image
 
 from .services.inference import predict_image
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
-STATIC_DIR = os.path.join(BASE_DIR, "static")
-# UPLOADS_DIR = os.path.join(BASE_DIR, "uploads")
-# os.makedirs(UPLOADS_DIR, exist_ok=True)
+from app.config import TEMPLATES_DIR
 
 templates = Jinja2Templates(directory=TEMPLATES_DIR)
 
@@ -22,9 +16,9 @@ async def index(request: Request):
     return templates.TemplateResponse("upload.html", {"request": request})
 
 @router.post("/predict")
-async def predict(request: Request, files: List[UploadFile] = File(...), model_name: str = Form(...)):
+async def predict(files: List[UploadFile] = File(...), model_name: str = Form(...)):
     if model_name not in ("cnn", "resnet"):
-        raise HTTPException(status_code=400, detail="Model must be 'cnn' or 'resnet'")
+        raise HTTPException(status_code=400, detail="Неизвестное имя модели")
 
     results = []
     for file in files:
@@ -33,7 +27,7 @@ async def predict(request: Request, files: List[UploadFile] = File(...), model_n
         except Exception as e:
             results.append({
                 "filename": file.filename,
-                "error": "invalid image"
+                "error": "неправильный файл"
             })
             continue
 

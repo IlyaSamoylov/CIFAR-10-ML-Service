@@ -3,11 +3,7 @@ import torch.nn as nn
 import os
 from torchvision.models.resnet import ResNet, BasicBlock
 
-from app.config import DEVICE
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-MODELS_DIR = os.path.join(BASE_DIR, "models")
-
+from app.config import DEVICE, MODELS_DIR
 
 class ResNET18(ResNet):
     def __init__(self):
@@ -22,7 +18,7 @@ class ResNET18(ResNet):
 
     def load_weights(self):
         path = self._model_path("resnet18")
-        print(f"Loaded weights for ResNET18 from {path}")
+        print(f"Веса для ResNET18 загружены из директории {path}")
         if os.path.exists(path):
             state_dict = torch.load(path, map_location=DEVICE)
             missing, unexpected = self.load_state_dict(state_dict, strict=False)
@@ -30,7 +26,7 @@ class ResNET18(ResNet):
                 print("Missing:", missing) # если в обученной модели веса, которых не достает в инференсной
                 print("Unexpected:", unexpected) # если в инференсной модели веса, которых не хватает в обученной
         else:
-            print("No weights found at:", path)
+            print("Веса не найдены по пути:", path)
 
         self.to(DEVICE)
         self.eval()
