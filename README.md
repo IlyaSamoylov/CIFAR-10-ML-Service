@@ -35,11 +35,23 @@ uvicorn app.main:app --reload
 ## Что в репозитории
 
 - `app/` — FastAPI приложение
-  - `main.py` — основной сервер (эндпойнты для инференса)
-  - `models/` — обученные веса (cnn.pth, resnet18.pth) 
-  - `templates/` — HTML шаблоны
+  - `models/` — обученные веса
+    - `cnn.pth`
+    - `resnet18.pth`
+  - `services/` - вспомогательные сервисы для работы с моделями
+    - `models_classes/` - классы для моделей
+      - `cnn_model.py`
+      - `resnet18_model.py`
+    - `inference.py` - инференс
+    - `model_loader.py` - загрузка моделей
+    - `preprocess.py` - предобработка
   - `static/` — файлы стилей css
-
+    - `style.css` 
+  - `templates/` — HTML шаблоны
+    - `upload.html` 
+  - `main.py` — основной сервер (эндпойнты для инференса)
+  - `model_registry.py` - список доступных моделей
+  - `routes.py` - маршруты приложения
 - `notebooks/` — Colab ноутбук: EDA - обучение моделей
 - `requirements.txt` — зависимости
 
