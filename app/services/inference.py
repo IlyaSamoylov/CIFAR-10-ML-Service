@@ -1,5 +1,5 @@
 from PIL import Image
-from typing import Literal, Dict
+from typing import Dict
 import torch
 from torchvision import transforms
 
@@ -15,7 +15,7 @@ _transform = transforms.Compose([
                          (0.2470, 0.2435, 0.2616))
 ])
 
-def predict_image(image: Image.Image, model_name: Literal["cnn", "resnet"]) -> Dict:
+def predict_image(image: Image.Image, model_name: str) -> Dict:
     # Базовая очистка
     image = clean_image(image)
 

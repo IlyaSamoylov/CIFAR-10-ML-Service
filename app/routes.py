@@ -6,6 +6,7 @@ from PIL import Image
 
 from .services.inference import predict_image
 from app.config import TEMPLATES_DIR
+from app.model_registry import MODEL_REGISTRY
 
 templates = Jinja2Templates(directory=TEMPLATES_DIR)
 
@@ -17,7 +18,7 @@ async def index(request: Request):
 
 @router.post("/predict")
 async def predict(files: List[UploadFile] = File(...), model_name: str = Form(...)):
-    if model_name not in ("cnn", "resnet"):
+    if model_name not in MODEL_REGISTRY:
         raise HTTPException(status_code=400, detail="Неизвестное имя модели")
 
     results = []
